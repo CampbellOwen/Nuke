@@ -12,9 +12,21 @@
 		5A116592212E063900AC33CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A116590212E063900AC33CD /* Main.storyboard */; };
 		5A116594212E063A00AC33CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A116593212E063A00AC33CD /* Assets.xcassets */; };
 		5A116597212E063A00AC33CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A116595212E063A00AC33CD /* LaunchScreen.storyboard */; };
+		5A11659F212E064800AC33CD /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11659E212E064800AC33CD /* Video.swift */; };
+		5A1165A1212E087300AC33CD /* GiantBomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1165A0212E087300AC33CD /* GiantBomb.swift */; };
+		5A186C7D212E661B00413B1A /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A186C7C212E661B00413B1A /* VideoService.swift */; };
+		5A186C7F212F5EAC00413B1A /* ShowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A186C7E212F5EAC00413B1A /* ShowService.swift */; };
+		5A186C81212F615300413B1A /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A186C80212F615300413B1A /* CategoryService.swift */; };
+		5A186C83212F64EB00413B1A /* VideoCollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A186C82212F64EB00413B1A /* VideoCollectionInfo.swift */; };
+		5A409662212E1CC30060A2F8 /* GiantBombService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A409661212E1CC30060A2F8 /* GiantBombService.swift */; };
+		5A409665212E3EA40060A2F8 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A409664212E3EA40060A2F8 /* Show.swift */; };
+		5A409667212E3F4D0060A2F8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A409666212E3F4D0060A2F8 /* Category.swift */; };
+		5A409669212E43640060A2F8 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A409668212E43640060A2F8 /* ApiResponse.swift */; };
+		76C1C336A30C44F0C6CA2AFD /* Pods_Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AF059FDE91645FD5D129F0 /* Pods_Nuke.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A0B19A491057DCAC6B9BAB0 /* Pods-Nuke.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nuke.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nuke/Pods-Nuke.release.xcconfig"; sourceTree = "<group>"; };
 		5A116589212E063900AC33CD /* Nuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A11658C212E063900AC33CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A11658E212E063900AC33CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +34,18 @@
 		5A116593212E063A00AC33CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A116596212E063A00AC33CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A116598212E063A00AC33CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A11659E212E064800AC33CD /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Video.swift; path = ../Network/Video.swift; sourceTree = "<group>"; };
+		5A1165A0212E087300AC33CD /* GiantBomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiantBomb.swift; sourceTree = "<group>"; };
+		5A186C7C212E661B00413B1A /* VideoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
+		5A186C7E212F5EAC00413B1A /* ShowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowService.swift; sourceTree = "<group>"; };
+		5A186C80212F615300413B1A /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
+		5A186C82212F64EB00413B1A /* VideoCollectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionInfo.swift; sourceTree = "<group>"; };
+		5A409661212E1CC30060A2F8 /* GiantBombService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiantBombService.swift; sourceTree = "<group>"; };
+		5A409664212E3EA40060A2F8 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		5A409666212E3F4D0060A2F8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		5A409668212E43640060A2F8 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
+		73AF059FDE91645FD5D129F0 /* Pods_Nuke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nuke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BCE42F1884B692ABB78EE40 /* Pods-Nuke.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nuke.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nuke/Pods-Nuke.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +53,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76C1C336A30C44F0C6CA2AFD /* Pods_Nuke.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		215E2BC7703A4066057DDDB3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7BCE42F1884B692ABB78EE40 /* Pods-Nuke.debug.xcconfig */,
+				3A0B19A491057DCAC6B9BAB0 /* Pods-Nuke.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5A116580212E063900AC33CD = {
 			isa = PBXGroup;
 			children = (
 				5A11658B212E063900AC33CD /* Nuke */,
 				5A11658A212E063900AC33CD /* Products */,
+				215E2BC7703A4066057DDDB3 /* Pods */,
+				B78A2B5DCF8249218F3EB0BF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +90,56 @@
 		5A11658B212E063900AC33CD /* Nuke */ = {
 			isa = PBXGroup;
 			children = (
+				5A186C79212E5B0600413B1A /* Network */,
 				5A11658C212E063900AC33CD /* AppDelegate.swift */,
-				5A11658E212E063900AC33CD /* ViewController.swift */,
+				5A186C84212F79E300413B1A /* Controllers */,
 				5A116590212E063900AC33CD /* Main.storyboard */,
+				5A1165A0212E087300AC33CD /* GiantBomb.swift */,
 				5A116593212E063A00AC33CD /* Assets.xcassets */,
 				5A116595212E063A00AC33CD /* LaunchScreen.storyboard */,
 				5A116598212E063A00AC33CD /* Info.plist */,
+				5A409663212E3C170060A2F8 /* Models */,
 			);
 			path = Nuke;
+			sourceTree = "<group>";
+		};
+		5A186C79212E5B0600413B1A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5A409661212E1CC30060A2F8 /* GiantBombService.swift */,
+				5A409668212E43640060A2F8 /* ApiResponse.swift */,
+				5A186C7C212E661B00413B1A /* VideoService.swift */,
+				5A186C7E212F5EAC00413B1A /* ShowService.swift */,
+				5A186C80212F615300413B1A /* CategoryService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		5A186C84212F79E300413B1A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5A11658E212E063900AC33CD /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5A409663212E3C170060A2F8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5A11659E212E064800AC33CD /* Video.swift */,
+				5A409664212E3EA40060A2F8 /* Show.swift */,
+				5A409666212E3F4D0060A2F8 /* Category.swift */,
+				5A186C82212F64EB00413B1A /* VideoCollectionInfo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B78A2B5DCF8249218F3EB0BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73AF059FDE91645FD5D129F0 /* Pods_Nuke.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +149,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A11659B212E063A00AC33CD /* Build configuration list for PBXNativeTarget "Nuke" */;
 			buildPhases = (
+				3290D4DCF4A5BD3E57B88B83 /* [CP] Check Pods Manifest.lock */,
 				5A116585212E063900AC33CD /* Sources */,
 				5A116586212E063900AC33CD /* Frameworks */,
 				5A116587212E063900AC33CD /* Resources */,
+				C5317F6B3AE8EA9BD419F7EF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,13 +210,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3290D4DCF4A5BD3E57B88B83 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nuke-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5317F6B3AE8EA9BD419F7EF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Nuke/Pods-Nuke-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nuke/Pods-Nuke-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5A116585212E063900AC33CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A409665212E3EA40060A2F8 /* Show.swift in Sources */,
+				5A186C7D212E661B00413B1A /* VideoService.swift in Sources */,
+				5A186C7F212F5EAC00413B1A /* ShowService.swift in Sources */,
+				5A186C83212F64EB00413B1A /* VideoCollectionInfo.swift in Sources */,
+				5A186C81212F615300413B1A /* CategoryService.swift in Sources */,
+				5A409662212E1CC30060A2F8 /* GiantBombService.swift in Sources */,
 				5A11658F212E063900AC33CD /* ViewController.swift in Sources */,
+				5A1165A1212E087300AC33CD /* GiantBomb.swift in Sources */,
+				5A409669212E43640060A2F8 /* ApiResponse.swift in Sources */,
+				5A11659F212E064800AC33CD /* Video.swift in Sources */,
 				5A11658D212E063900AC33CD /* AppDelegate.swift in Sources */,
+				5A409667212E3F4D0060A2F8 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +411,7 @@
 		};
 		5A11659C212E063A00AC33CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BCE42F1884B692ABB78EE40 /* Pods-Nuke.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,6 +430,7 @@
 		};
 		5A11659D212E063A00AC33CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A0B19A491057DCAC6B9BAB0 /* Pods-Nuke.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
