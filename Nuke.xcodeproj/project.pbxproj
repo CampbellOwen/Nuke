@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32382688213DF47600FEA300 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32382687213DF47600FEA300 /* Coordinator.swift */; };
+		3238268B213DF4EC00FEA300 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3238268A213DF4EC00FEA300 /* Storyboarded.swift */; };
+		3238268D213DF69600FEA300 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3238268C213DF69600FEA300 /* MainCoordinator.swift */; };
+		32382691213E5D8700FEA300 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32382690213E5D8700FEA300 /* Result.swift */; };
 		5A11658D212E063900AC33CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11658C212E063900AC33CD /* AppDelegate.swift */; };
-		5A11658F212E063900AC33CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11658E212E063900AC33CD /* ViewController.swift */; };
+		5A11658F212E063900AC33CD /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11658E212E063900AC33CD /* CategoryPickerViewController.swift */; };
 		5A116592212E063900AC33CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A116590212E063900AC33CD /* Main.storyboard */; };
 		5A116594212E063A00AC33CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A116593212E063A00AC33CD /* Assets.xcassets */; };
 		5A116597212E063A00AC33CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A116595212E063A00AC33CD /* LaunchScreen.storyboard */; };
@@ -26,10 +30,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32382687213DF47600FEA300 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		3238268A213DF4EC00FEA300 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		3238268C213DF69600FEA300 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		32382690213E5D8700FEA300 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		3A0B19A491057DCAC6B9BAB0 /* Pods-Nuke.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nuke.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nuke/Pods-Nuke.release.xcconfig"; sourceTree = "<group>"; };
 		5A116589212E063900AC33CD /* Nuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A11658C212E063900AC33CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5A11658E212E063900AC33CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5A11658E212E063900AC33CD /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		5A116591212E063900AC33CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5A116593212E063A00AC33CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A116596212E063A00AC33CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -69,6 +77,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		32382686213DF46300FEA300 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				32382687213DF47600FEA300 /* Coordinator.swift */,
+				3238268C213DF69600FEA300 /* MainCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		32382689213DF4C900FEA300 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5A116590212E063900AC33CD /* Main.storyboard */,
+				3238268A213DF4EC00FEA300 /* Storyboarded.swift */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		5A116580212E063900AC33CD = {
 			isa = PBXGroup;
 			children = (
@@ -90,10 +116,11 @@
 		5A11658B212E063900AC33CD /* Nuke */ = {
 			isa = PBXGroup;
 			children = (
+				32382689213DF4C900FEA300 /* Storyboards */,
+				32382686213DF46300FEA300 /* Coordinators */,
 				5A186C79212E5B0600413B1A /* Network */,
 				5A11658C212E063900AC33CD /* AppDelegate.swift */,
 				5A186C84212F79E300413B1A /* Controllers */,
-				5A116590212E063900AC33CD /* Main.storyboard */,
 				5A1165A0212E087300AC33CD /* GiantBomb.swift */,
 				5A116593212E063A00AC33CD /* Assets.xcassets */,
 				5A116595212E063A00AC33CD /* LaunchScreen.storyboard */,
@@ -111,6 +138,7 @@
 				5A186C7C212E661B00413B1A /* VideoService.swift */,
 				5A186C7E212F5EAC00413B1A /* ShowService.swift */,
 				5A186C80212F615300413B1A /* CategoryService.swift */,
+				32382690213E5D8700FEA300 /* Result.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -118,7 +146,7 @@
 		5A186C84212F79E300413B1A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5A11658E212E063900AC33CD /* ViewController.swift */,
+				5A11658E212E063900AC33CD /* CategoryPickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -260,16 +288,20 @@
 			files = (
 				5A409665212E3EA40060A2F8 /* Show.swift in Sources */,
 				5A186C7D212E661B00413B1A /* VideoService.swift in Sources */,
+				32382688213DF47600FEA300 /* Coordinator.swift in Sources */,
 				5A186C7F212F5EAC00413B1A /* ShowService.swift in Sources */,
 				5A186C83212F64EB00413B1A /* VideoCollectionInfo.swift in Sources */,
 				5A186C81212F615300413B1A /* CategoryService.swift in Sources */,
+				32382691213E5D8700FEA300 /* Result.swift in Sources */,
 				5A409662212E1CC30060A2F8 /* GiantBombService.swift in Sources */,
-				5A11658F212E063900AC33CD /* ViewController.swift in Sources */,
+				5A11658F212E063900AC33CD /* CategoryPickerViewController.swift in Sources */,
 				5A1165A1212E087300AC33CD /* GiantBomb.swift in Sources */,
 				5A409669212E43640060A2F8 /* ApiResponse.swift in Sources */,
 				5A11659F212E064800AC33CD /* Video.swift in Sources */,
 				5A11658D212E063900AC33CD /* AppDelegate.swift in Sources */,
 				5A409667212E3F4D0060A2F8 /* Category.swift in Sources */,
+				3238268D213DF69600FEA300 /* MainCoordinator.swift in Sources */,
+				3238268B213DF4EC00FEA300 /* Storyboarded.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

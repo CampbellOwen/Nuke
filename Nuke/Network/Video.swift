@@ -29,16 +29,16 @@ enum ImageQuality: String, Codable {
 struct Images: Codable
 {
     
-    var icon: URL
-    var medium : URL
-    var screen: URL
-    var screenLarge: URL
-    var small: URL
-    var large: URL
-    var thumb: URL
-    var tiny: URL
-    var original: URL
-    var tags: String
+    var icon: URL?
+    var medium : URL?
+    var screen: URL?
+    var screenLarge: URL?
+    var small: URL?
+    var large: URL?
+    var thumb: URL?
+    var tiny: URL?
+    var original: URL?
+    var tags: String?
     
     enum CodingKeys: String, CodingKey {
         case icon = "icon_url"
@@ -57,15 +57,15 @@ struct Images: Codable
 struct Video: Decodable, CustomStringConvertible
 {
     var deck: String
-    var urls: [VideoQuality: URL]
+    var urls: [VideoQuality: URL?]
     var guid: String
     var id: Int
-    var images: [ImageQuality: URL]
+    var images: [ImageQuality: URL?]
     var length: TimeInterval
     var name: String
     var date: String
     var siteUrl: URL
-    var author: String
+    var author: String?
     var show: Show?
     var categories: [Category]
     var savedTime: String?
@@ -102,16 +102,16 @@ extension Video {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let deck = try container.decode(String.self, forKey: .deck)
         
-        let high_url = try container.decode(URL.self, forKey: .high_url)
-        let hd_url = try container.decode(URL.self, forKey: .hd_url)
-        let low_url = try container.decode(URL.self, forKey: .low_url)
-        let urls: [VideoQuality: URL] = [ .hd: hd_url, .high: high_url, .low: low_url]
+        let high_url = try? container.decode(URL.self, forKey: .high_url)
+        let hd_url = try? container.decode(URL.self, forKey: .hd_url)
+        let low_url = try? container.decode(URL.self, forKey: .low_url)
+        let urls: [VideoQuality: URL?] = [ .hd: hd_url, .high: high_url, .low: low_url]
         
         let guid = try container.decode(String.self, forKey: .guid)
         let id = try container.decode(Int.self, forKey: .id)
         
         let images = try container.decode(Images.self, forKey: .images)
-        var imagesDict = [ImageQuality:URL]()
+        var imagesDict = [ImageQuality:URL?]()
         imagesDict[.icon] = images.icon
         imagesDict[.medium] = images.medium
         imagesDict[.screen] = images.screen
@@ -126,11 +126,11 @@ extension Video {
         let name = try container.decode(String.self, forKey: .name)
         let date = try container.decode(String.self, forKey: .date)
         let siteUrl = try container.decode(URL.self, forKey: .siteUrl)
-        let author = try container.decode(String.self, forKey: .author)
-        let show = try container.decode(Show?.self, forKey: .show)
+        let author = try? container.decode(String.self, forKey: .author)
+        let show = try? container.decode(Show.self, forKey: .show)
         let categories = try container.decode([Category].self, forKey: .categories)
-        let savedTime = try container.decode(String?.self, forKey: .savedTime)
-        let youtubeId = try container.decode(String?.self, forKey: .youtubeId)
+        let savedTime = try? container.decode(String.self, forKey: .savedTime)
+        let youtubeId = try? container.decode(String.self, forKey: .youtubeId)
         
         self.init(deck: deck, urls: urls, guid: guid, id: id, images: imagesDict, length: length, name: name, date: date, siteUrl: siteUrl, author: author, show: show, categories: categories, savedTime: savedTime, youtubeId: youtubeId)
     }

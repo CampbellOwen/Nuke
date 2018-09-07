@@ -11,28 +11,33 @@ import Moya
 
 class ShowService {
     private var provider: MoyaProvider<GiantBombService>
-    
+    private var fetchInProgress = false
+
     init(with provider:MoyaProvider<GiantBombService>) {
         self.provider = provider
     }
     
-    public func getShows(limit:Int? = nil, offset:Int? = nil, sort:SortOptions?=nil, completion: @escaping (ApiResponse<Show>) -> Void) {
+    public func getShows(limit:Int? = nil, offset:Int? = nil, sort:SortOptions?=nil, completion: @escaping (Result<[Show]>) -> Void) {
+        fetchInProgress = true
         provider.request(.shows(limit: limit, offset: offset, sort: sort)) { (result) in
+            self.fetchInProgress = false
+            
             switch result {
-            case .failure(let error):
-                print("Error:\(error)")
-            case .success(let response):
+            case .success(let moyaResponse):
                 do {
-                    try _ = response.filterSuccessfulStatusCodes()
-                    let data = try! response.mapString()
+                    try _ = moyaResponse.filterSuccessfulStatusCodes()
+                    let data = try! moyaResponse.mapString()
                     let decoder = JSONDecoder()
                     
                     let resultsMeta = try decoder.decode(ApiResponse<Show>.self, from: data.data(using: .utf8)!)
-                    completion(resultsMeta)
+                    completion(.success(resultsMeta.results))
                 }
                 catch {
-                    print("Error: \(error)")
+                    completion(.failure(error))
                 }
+                
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
