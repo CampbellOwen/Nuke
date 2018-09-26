@@ -12,9 +12,24 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    var api: GiantBombAPI?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        api = GiantBombAPI(apiKey: "")
+        api?.getShows(limit:nil, offset: nil, sort: nil) { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let shows):
+                for show in shows {
+                    print(show.name)
+                }
+            }
+        }
+        
         return true
     }
 

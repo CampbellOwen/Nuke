@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3238268B213DF4EC00FEA300 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3238268A213DF4EC00FEA300 /* Storyboarded.swift */; };
 		5A11658D212E063900AC33CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11658C212E063900AC33CD /* AppDelegate.swift */; };
-		5A116592212E063900AC33CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A116590212E063900AC33CD /* Main.storyboard */; };
 		5A116594212E063A00AC33CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A116593212E063A00AC33CD /* Assets.xcassets */; };
 		5A116597212E063A00AC33CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A116595212E063A00AC33CD /* LaunchScreen.storyboard */; };
 		5A11659F212E064800AC33CD /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11659E212E064800AC33CD /* Video.swift */; };
@@ -19,13 +18,13 @@
 		5A409669212E43640060A2F8 /* GiantBombApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A409668212E43640060A2F8 /* GiantBombApiResponse.swift */; };
 		5AAB0CA3215B411700A593C6 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB0CA2215B411700A593C6 /* HTTPMethod.swift */; };
 		5AAB0CB5215B60D800A593C6 /* GiantBombAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB0CB4215B60D800A593C6 /* GiantBombAPI.swift */; };
+		5AAB0CB7215B70EB00A593C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AAB0CB6215B70EB00A593C6 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3238268A213DF4EC00FEA300 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		5A116589212E063900AC33CD /* Nuke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nuke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A11658C212E063900AC33CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5A116591212E063900AC33CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5A116593212E063A00AC33CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A116596212E063A00AC33CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A116598212E063A00AC33CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -36,6 +35,7 @@
 		5A409668212E43640060A2F8 /* GiantBombApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiantBombApiResponse.swift; sourceTree = "<group>"; };
 		5AAB0CA2215B411700A593C6 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		5AAB0CB4215B60D800A593C6 /* GiantBombAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiantBombAPI.swift; sourceTree = "<group>"; };
+		5AAB0CB6215B70EB00A593C6 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +53,8 @@
 			isa = PBXGroup;
 			children = (
 				5A116595212E063A00AC33CD /* LaunchScreen.storyboard */,
-				5A116590212E063900AC33CD /* Main.storyboard */,
 				3238268A213DF4EC00FEA300 /* Storyboarded.swift */,
+				5AAB0CB6215B70EB00A593C6 /* Main.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -183,9 +183,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AAB0CB7215B70EB00A593C6 /* Main.storyboard in Resources */,
 				5A116597212E063A00AC33CD /* LaunchScreen.storyboard in Resources */,
 				5A116594212E063A00AC33CD /* Assets.xcassets in Resources */,
-				5A116592212E063900AC33CD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,14 +211,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5A116590212E063900AC33CD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5A116591212E063900AC33CD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5A116595212E063A00AC33CD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
