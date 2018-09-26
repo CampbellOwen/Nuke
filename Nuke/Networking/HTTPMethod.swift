@@ -1,5 +1,5 @@
 //
-//  HTTPTask.swift
+//  HTTPMethod.swift
 //  Nuke
 //
 //  Created by Owen Campbell on 2018-09-25.
@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+enum HTTPMethod: String {
+    case get = "GET"
+}
