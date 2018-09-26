@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ApiResponse<ResultType:Decodable>: Decodable, CustomStringConvertible
+struct GiantBombApiResponse<ResultType:Decodable>: Decodable, CustomStringConvertible
 {
     var error: String
     var limit: Int
