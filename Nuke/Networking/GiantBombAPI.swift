@@ -24,7 +24,7 @@ enum Direction: String {
     case descending = "desc"
 }
 
-enum EndPoint {
+enum Endpoint {
     case video(guid: Int)
     case videos(limit: Int?, offset: Int?, sort: SortOptions?, categoryId: String?, showId: String?)
     case category(id: String)
@@ -36,7 +36,8 @@ enum EndPoint {
     case saveTime(id: String, time: TimeInterval)
     case getAllSavedTimes
 }
-extension EndPoint {
+
+extension Endpoint {
     var baseURL: URL { return URL(string: "https://www.giantbomb.com/api")! }
     
     var path: String {
@@ -124,20 +125,27 @@ enum Result<T> {
     case failure(String)
 }
 
-class GiantBombAPI {
-    private var task: URLSessionTask?
-    
+struct PaginationInfo {
+    var lastLimit: Int
+    var lastOffset: Int
+}
+
+class GiantBombAPI {    
     private var apiKey: String
+    private var networkManager: NetworkManager
+    private var paginations: [String:PaginationInfo]
     
     func cancel() {
-        task?.cancel()
+        networkManager.cancel()
     }
     
     init(apiKey: String) {
         self.apiKey = "3f76ef5f20263c6f4ae1381e60ef902e22af58ff"
+        networkManager = NetworkManager()
+        paginations = [String:PaginationInfo]()
     }
     
-    private func createURLRequest(endpoint: EndPoint) throws -> URLRequest {
+    private func createURLRequest(endpoint: Endpoint) throws -> URLRequest {
         var urlRequest = URLRequest(url: endpoint.fullURL,
                                     cachePolicy: .useProtocolCachePolicy,
                                     timeoutInterval: 10.0)
@@ -148,7 +156,7 @@ class GiantBombAPI {
         if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
             !parameters.isEmpty {
             urlComponents.queryItems = [URLQueryItem]()
-        
+            
             for (key, value) in parameters {
                 let queryItem = URLQueryItem(name: key, value: "\(value)".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))
                 urlComponents.queryItems?.append(queryItem)
@@ -162,49 +170,60 @@ class GiantBombAPI {
         return urlRequest
     }
     
-    private func makeRequest<T:Decodable>(endpoint: EndPoint, completion: @escaping (Result<T>) -> Void){
+    private func makeRequest<T:Decodable>(endpoint: Endpoint, completion: @escaping (Result<[T]>) -> Void, paginationCompletion: ((GiantBombApiResponse<T>, inout [String:PaginationInfo]) -> Void)?){
         do {
             let urlRequest = try createURLRequest(endpoint: endpoint)
-            task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-                if error != nil {
-                    completion(.failure(NetworkResponse.failed.rawValue))
-                }
-                
-                if let data = data {
-                
-                    do {
-                        let jsonDecoder = JSONDecoder()
-                        let decodedItem = try jsonDecoder.decode(T.self, from: data)
-                        completion(.success(decodedItem))
+            networkManager.makeRequest(urlRequest: urlRequest) { [weak self](result: Result<GiantBombApiResponse<T>>) in
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(let data):
+                    if self?.paginations != nil {
+                        paginationCompletion?(data, &self!.paginations)
                     }
-                    catch {
-                        completion(.failure(error.localizedDescription))
-                    }
+                    completion(.success(data.results))
                 }
-                else {
-                    completion(.failure(NetworkResponse.noData.rawValue))
-                }
-                
             }
-            task?.resume()
         }
         catch {
-            completion(.failure(NetworkError.missingURL.rawValue))
+            completion(.failure(error.localizedDescription))
         }
     }
 }
 
+// Shows Endpoint
 extension GiantBombAPI {
-//    case shows(limit: Int?, offset: Int?, sort: SortOptions?)
-    public func getShows(limit: Int?, offset: Int?, sort: SortOptions?, completion: @escaping (Result<[Show]>) -> Void) {
-        let endpoint = EndPoint.shows(limit: limit, offset: offset, sort: sort)
-        makeRequest(endpoint: endpoint) { (result: Result<GiantBombApiResponse<Show>>) in
-            switch result {
-            case .success(let apiResult):
-                completion(.success(apiResult.results))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+    
+    public func getShows(limit: Int?,
+                         offset: Int?,
+                         sort: SortOptions?,
+                         completion: @escaping (Result<[Show]>) -> Void) {
+        let endpoint = Endpoint.shows(limit: limit, offset: offset, sort: sort)
+        makeRequest(endpoint: endpoint, completion: completion, paginationCompletion: nil)
+    }
+    
+    public func getNextPageShows(limit: Int?,
+                                 sort: SortOptions?,
+                                 completion: @escaping (Result<[Show]>) -> Void) {
+        guard let paginationInfo = paginations[Endpoint.shows(limit: nil, offset: nil, sort: nil).path] else {
+            getShows(limit: limit, offset: nil, sort: sort, completion: completion)
+            return
         }
+        let newOffset = paginationInfo.lastLimit + paginationInfo.lastOffset
+        let endpoint = Endpoint.shows(limit: limit, offset: newOffset, sort: sort)
+        makeRequest(endpoint: endpoint, completion: completion) {[endpoint] (apiResponse, paginations: inout[String:PaginationInfo]) in
+            paginations[endpoint.path] = PaginationInfo(lastLimit: apiResponse.limit, lastOffset: apiResponse.offset)
+        }
+    }
+}
+
+// Categories Endpoint
+extension GiantBombAPI {
+    public func getCategories(limit: Int?,
+                              offset: Int?,
+                              sort: SortOptions?,
+                              completion: @escaping (Result<[Category]>) -> Void) {
+        let endpoint = Endpoint.categories(limit: limit, offset: offset, sort: sort)
+//        makeRequest(endpoint: endpoint, completion: completion)
     }
 }
