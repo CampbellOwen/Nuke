@@ -16,10 +16,16 @@
 		5A409665212E3EA40060A2F8 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A409664212E3EA40060A2F8 /* Show.swift */; };
 		5A409667212E3F4D0060A2F8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A409666212E3F4D0060A2F8 /* Category.swift */; };
 		5A409669212E43640060A2F8 /* GiantBombApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A409668212E43640060A2F8 /* GiantBombApiResponse.swift */; };
+		5AA6EFC9215F2E0D00F37880 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA6EFC8215F2E0D00F37880 /* KeychainManager.swift */; };
 		5AA775A9215C4BF300871479 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA775A8215C4BF300871479 /* NetworkManager.swift */; };
 		5AAB0CA3215B411700A593C6 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB0CA2215B411700A593C6 /* HTTPMethod.swift */; };
 		5AAB0CB5215B60D800A593C6 /* GiantBombAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB0CB4215B60D800A593C6 /* GiantBombAPI.swift */; };
 		5AAB0CB7215B70EB00A593C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AAB0CB6215B70EB00A593C6 /* Main.storyboard */; };
+		5AAB3F23215EE31700274ED4 /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB3F22215EE31700274ED4 /* AuthenticationResponse.swift */; };
+		5AAB3F25215EF0A900274ED4 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AAB3F24215EF0A900274ED4 /* Login.storyboard */; };
+		5AAB3F27215EF35E00274ED4 /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB3F26215EF35E00274ED4 /* CategoryListViewController.swift */; };
+		5AAB3F29215EF7C400274ED4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB3F28215EF7C400274ED4 /* LoginViewController.swift */; };
+		5AAB3F2D215EFA4A00274ED4 /* LoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB3F2C215EFA4A00274ED4 /* LoginWebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +40,16 @@
 		5A409664212E3EA40060A2F8 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		5A409666212E3F4D0060A2F8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		5A409668212E43640060A2F8 /* GiantBombApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiantBombApiResponse.swift; sourceTree = "<group>"; };
+		5AA6EFC8215F2E0D00F37880 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		5AA775A8215C4BF300871479 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5AAB0CA2215B411700A593C6 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		5AAB0CB4215B60D800A593C6 /* GiantBombAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiantBombAPI.swift; sourceTree = "<group>"; };
 		5AAB0CB6215B70EB00A593C6 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		5AAB3F22215EE31700274ED4 /* AuthenticationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationResponse.swift; sourceTree = "<group>"; };
+		5AAB3F24215EF0A900274ED4 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		5AAB3F26215EF35E00274ED4 /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
+		5AAB3F28215EF7C400274ED4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5AAB3F2C215EFA4A00274ED4 /* LoginWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +69,7 @@
 				5A116595212E063A00AC33CD /* LaunchScreen.storyboard */,
 				3238268A213DF4EC00FEA300 /* Storyboarded.swift */,
 				5AAB0CB6215B70EB00A593C6 /* Main.storyboard */,
+				5AAB3F24215EF0A900274ED4 /* Login.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -88,6 +101,7 @@
 				5A116593212E063A00AC33CD /* Assets.xcassets */,
 				5A116598212E063A00AC33CD /* Info.plist */,
 				5A409663212E3C170060A2F8 /* Models */,
+				5AA6EFC8215F2E0D00F37880 /* KeychainManager.swift */,
 			);
 			path = Nuke;
 			sourceTree = "<group>";
@@ -95,6 +109,9 @@
 		5A186C84212F79E300413B1A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5AAB3F26215EF35E00274ED4 /* CategoryListViewController.swift */,
+				5AAB3F28215EF7C400274ED4 /* LoginViewController.swift */,
+				5AAB3F2C215EFA4A00274ED4 /* LoginWebViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -107,6 +124,7 @@
 				5A409664212E3EA40060A2F8 /* Show.swift */,
 				5A409666212E3F4D0060A2F8 /* Category.swift */,
 				5A186C82212F64EB00413B1A /* VideoCollectionInfo.swift */,
+				5AAB3F22215EE31700274ED4 /* AuthenticationResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,6 +204,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AAB3F25215EF0A900274ED4 /* Login.storyboard in Resources */,
 				5AAB0CB7215B70EB00A593C6 /* Main.storyboard in Resources */,
 				5A116597212E063A00AC33CD /* LaunchScreen.storyboard in Resources */,
 				5A116594212E063A00AC33CD /* Assets.xcassets in Resources */,
@@ -200,14 +219,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A409665212E3EA40060A2F8 /* Show.swift in Sources */,
+				5AAB3F2D215EFA4A00274ED4 /* LoginWebViewController.swift in Sources */,
 				5A186C83212F64EB00413B1A /* VideoCollectionInfo.swift in Sources */,
 				5AA775A9215C4BF300871479 /* NetworkManager.swift in Sources */,
+				5AA6EFC9215F2E0D00F37880 /* KeychainManager.swift in Sources */,
 				5A409669212E43640060A2F8 /* GiantBombApiResponse.swift in Sources */,
 				5A11659F212E064800AC33CD /* Video.swift in Sources */,
 				5A11658D212E063900AC33CD /* AppDelegate.swift in Sources */,
 				5AAB0CB5215B60D800A593C6 /* GiantBombAPI.swift in Sources */,
 				5AAB0CA3215B411700A593C6 /* HTTPMethod.swift in Sources */,
+				5AAB3F27215EF35E00274ED4 /* CategoryListViewController.swift in Sources */,
 				5A409667212E3F4D0060A2F8 /* Category.swift in Sources */,
+				5AAB3F23215EE31700274ED4 /* AuthenticationResponse.swift in Sources */,
+				5AAB3F29215EF7C400274ED4 /* LoginViewController.swift in Sources */,
 				3238268B213DF4EC00FEA300 /* Storyboarded.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -29,6 +29,7 @@ class NetworkManager {
                 }
             }
             else {
+                print(response?.debugDescription)
                 completion(.failure(NetworkResponse.noData.rawValue))
             }
             

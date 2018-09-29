@@ -139,19 +139,16 @@ class GiantBombAPI {
         networkManager.cancel()
     }
     
-    init(apiKey: String) {
+    init() {
         self.apiKey = "3f76ef5f20263c6f4ae1381e60ef902e22af58ff"
         networkManager = NetworkManager()
         paginations = [String:PaginationInfo]()
     }
     
-    private func createURLRequest(endpoint: Endpoint) throws -> URLRequest {
-        var urlRequest = URLRequest(url: endpoint.fullURL,
+    private func createURLRequest(url: URL, parameters: [String:Any]) throws -> URLRequest {
+        var urlRequest = URLRequest(url: url,
                                     cachePolicy: .useProtocolCachePolicy,
                                     timeoutInterval: 10.0)
-        guard let url = urlRequest.url else { throw NetworkError.missingURL }
-        var parameters = endpoint.parameters
-        parameters["api_key"] = apiKey
         
         if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
             !parameters.isEmpty {
@@ -170,9 +167,46 @@ class GiantBombAPI {
         return urlRequest
     }
     
-    private func makeRequest<T:Decodable>(endpoint: Endpoint, completion: @escaping (Result<[T]>) -> Void, paginationCompletion: ((GiantBombApiResponse<T>, inout [String:PaginationInfo]) -> Void)?){
+    private func createURLRequest(fromEndpoint endpoint: Endpoint) throws -> URLRequest {
+        let url = endpoint.fullURL
+        var parameters = endpoint.parameters
+        parameters["api_key"] = apiKey
+        
+        return try createURLRequest(url: url, parameters: parameters)
+    }
+    
+    public func authenticate(withToken code:String, completion: @escaping (Result<String>) -> Void) {
         do {
-            let urlRequest = try createURLRequest(endpoint: endpoint)
+            let parameters = ["format": "json",
+                              "regCode": code]
+            guard let url = URL(string: "https://www.giantbomb.com/app/Nuke/get-result") else {
+                completion(.failure(NetworkError.missingURL.rawValue))
+                return
+            }
+            let urlRequest = try createURLRequest(url: url,
+                                                  parameters: parameters)
+            networkManager.makeRequest(urlRequest: urlRequest) { (result: Result<AuthenticationRespone>) in
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(let response):
+                    switch response.status {
+                    case "success":
+                        completion(.success(response.regToken))
+                    default:
+                        completion(.failure("Authenticatoin failed"))
+                    }
+                }
+            }
+        }
+        catch {
+            completion(.failure(error.localizedDescription))
+        }
+    }
+    
+    private func makeApiRequest<T:Decodable>(endpoint: Endpoint, completion: @escaping (Result<[T]>) -> Void, paginationCompletion: ((GiantBombApiResponse<T>, inout [String:PaginationInfo]) -> Void)?){
+        do {
+            let urlRequest = try createURLRequest(fromEndpoint: endpoint)
             networkManager.makeRequest(urlRequest: urlRequest) { [weak self](result: Result<GiantBombApiResponse<T>>) in
                 switch result {
                 case .failure(let error):
@@ -199,7 +233,7 @@ extension GiantBombAPI {
                          sort: SortOptions?,
                          completion: @escaping (Result<[Show]>) -> Void) {
         let endpoint = Endpoint.shows(limit: limit, offset: offset, sort: sort)
-        makeRequest(endpoint: endpoint, completion: completion, paginationCompletion: nil)
+        makeApiRequest(endpoint: endpoint, completion: completion, paginationCompletion: nil)
     }
     
     public func getNextPageShows(limit: Int?,
@@ -211,7 +245,7 @@ extension GiantBombAPI {
         }
         let newOffset = paginationInfo.lastLimit + paginationInfo.lastOffset
         let endpoint = Endpoint.shows(limit: limit, offset: newOffset, sort: sort)
-        makeRequest(endpoint: endpoint, completion: completion) {[endpoint] (apiResponse, paginations: inout[String:PaginationInfo]) in
+        makeApiRequest(endpoint: endpoint, completion: completion) {[endpoint] (apiResponse, paginations: inout[String:PaginationInfo]) in
             paginations[endpoint.path] = PaginationInfo(lastLimit: apiResponse.limit, lastOffset: apiResponse.offset)
         }
     }
