@@ -40,15 +40,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LFe-yZ-U04" id="DPf-U0-4qD">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Click me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dng-tV-x0X">
-                                            <rect key="frame" x="16" y="11" width="66" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -57,7 +48,13 @@
                             <outlet property="delegate" destination="aYS-Uh-ZHp" id="ugK-Mo-abU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="WEe-By-lZS"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="WEe-By-lZS">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="tpD-rP-nMa">
+                            <connections>
+                                <action selector="refresh:" destination="aYS-Uh-ZHp" id="ixs-nK-Pmd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOn-8r-wcd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

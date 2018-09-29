@@ -8,15 +8,23 @@
 
 import UIKit
 
+private enum Sections: Int, CaseIterable{
+    case categories = 0
+    case shows
+}
+
 class CategoryListViewController: UITableViewController {
 
     var apiKey: String?
+    var api = GiantBombAPI()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let keychain = KeychainManager()
         print("Checking user is logged in")
         apiKey = keychain.getApiKey()
+        updateModel()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -31,24 +39,84 @@ class CategoryListViewController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func refresh(_ sender: UIBarButtonItem) {
+        updateModel()
+    }
+    
+    // MARK: - Model
+    var categories: [Category]? {
+        didSet {
+            tableView.reloadSections(IndexSet(integer: Sections.categories.rawValue), with: .automatic)
+        }
+    }
+    var shows: [Show]? {
+        didSet {
+            tableView.reloadSections(IndexSet(integer: Sections.shows.rawValue), with: .automatic)
+        }
+    }
+    
+    private func updateModel() {
+        api.getCategories(limit: nil, offset: nil, sort: nil) { result in
+            switch result {
+            case .failure(let error):
+                print("Error getting categories:\(error)")
+            case .success(let categories):
+                DispatchQueue.main.async {
+                    self.categories = categories
+                }
+            }
+        }
+        
+        api.getShows(limit: nil, offset: nil, sort: nil) { result in
+            switch result {
+            case .failure(let error):
+                print("Error getting shows:\(error)")
+            case .success(let shows):
+                DispatchQueue.main.async {
+                    self.shows = shows
+                }
+            }
+        }
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return Sections.allCases.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        guard let sectionName = Sections(rawValue: section) else {
+            return 0
+        }
+        switch sectionName {
+        case .categories:
+            return categories?.count ?? 0
+        case .shows:
+            return shows?.count ?? 0
+        }
+        
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseId", for: indexPath)
 
+        guard let sectionName = Sections(rawValue: indexPath.section) else {
+            return cell
+        }
         
+        switch sectionName {
+        case .categories:
+            let category = categories?[indexPath.item]
+            cell.textLabel?.text = category?.name
+        case .shows:
+            let show = shows?[indexPath.item]
+            cell.textLabel?.text = show?.name
+        }
 
         return cell
     }

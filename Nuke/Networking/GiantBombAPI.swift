@@ -8,12 +8,6 @@
 
 import Foundation
 
-public enum NetworkError: String, Error {
-    case parametersNil = "Parameters were nil."
-    case encodingFailed = "Parameter encoding failed."
-    case missingURL = "URL is nil."
-}
-
 struct SortOptions {
     var direction: Direction
     var field: String
@@ -35,6 +29,25 @@ enum Endpoint {
     case getSavedTime(id: String)
     case saveTime(id: String, time: TimeInterval)
     case getAllSavedTimes
+    
+    mutating public func changeOffset(offset: Int) {
+        switch self {
+            case .video,
+                 .category,
+                 .show,
+                 .currentLive,
+                 .getSavedTime,
+                 .saveTime,
+                 .getAllSavedTimes:
+            return
+        case .videos(let limit, _, let sort, let categoryId, let showId):
+            self = .videos(limit: limit, offset: offset, sort: sort, categoryId: categoryId, showId: showId)
+        case .categories(let limit, _, let sort):
+            self = .categories(limit: limit, offset: offset, sort: sort)
+        case .shows(let limit, _, let sort):
+            self = .shows(limit: limit, offset: offset, sort: sort)
+        }
+    }
 }
 
 extension Endpoint {
@@ -120,6 +133,13 @@ enum NetworkResponse: String {
     case unableToDecode = "Could not decode response."
 }
 
+public enum NetworkError: String, Error {
+    case parametersNil = "Parameters were nil."
+    case encodingFailed = "Parameter encoding failed."
+    case missingURL = "URL is nil."
+    case badApiKey = "Api key missing or invalid."
+}
+
 enum Result<T> {
     case success(T)
     case failure(String)
@@ -131,16 +151,16 @@ struct PaginationInfo {
 }
 
 class GiantBombAPI {    
-    private var apiKey: String
+    private var apiKey: String?
     private var networkManager: NetworkManager
     private var paginations: [String:PaginationInfo]
+    private var keychain = KeychainManager()
     
     func cancel() {
         networkManager.cancel()
     }
     
     init() {
-        self.apiKey = "3f76ef5f20263c6f4ae1381e60ef902e22af58ff"
         networkManager = NetworkManager()
         paginations = [String:PaginationInfo]()
     }
@@ -170,6 +190,14 @@ class GiantBombAPI {
     private func createURLRequest(fromEndpoint endpoint: Endpoint) throws -> URLRequest {
         let url = endpoint.fullURL
         var parameters = endpoint.parameters
+        if apiKey == nil {
+            apiKey = keychain.getApiKey()
+        }
+        
+        guard let apiKey = apiKey else {
+            throw NetworkError.badApiKey
+        }
+        
         parameters["api_key"] = apiKey
         
         return try createURLRequest(url: url, parameters: parameters)
@@ -205,6 +233,7 @@ class GiantBombAPI {
     }
     
     private func makeApiRequest<T:Decodable>(endpoint: Endpoint, completion: @escaping (Result<[T]>) -> Void, paginationCompletion: ((GiantBombApiResponse<T>, inout [String:PaginationInfo]) -> Void)?){
+        cancel()
         do {
             let urlRequest = try createURLRequest(fromEndpoint: endpoint)
             networkManager.makeRequest(urlRequest: urlRequest) { [weak self](result: Result<GiantBombApiResponse<T>>) in
@@ -223,6 +252,23 @@ class GiantBombAPI {
             completion(.failure(error.localizedDescription))
         }
     }
+    
+    private func makePaginatedApiRequest<T:Decodable>(endpoint: Endpoint, completion: @escaping (Result<[T]>) -> Void) {
+        let paginationCompletion: ((GiantBombApiResponse<T>, inout [String:PaginationInfo]) -> Void) = { [endpoint] (apiResponse, paginations: inout[String:PaginationInfo]) in
+            paginations[endpoint.path] = PaginationInfo(lastLimit: apiResponse.limit, lastOffset: apiResponse.offset)
+        }
+        
+        guard let paginationInfo = paginations[endpoint.path] else {
+            makeApiRequest(endpoint: endpoint, completion: completion, paginationCompletion: paginationCompletion)
+            return
+        }
+        
+        let newOffset = paginationInfo.lastLimit + paginationInfo.lastOffset
+        var endpointCopy = endpoint
+        endpointCopy.changeOffset(offset: newOffset)
+        makeApiRequest(endpoint: endpointCopy, completion: completion, paginationCompletion: paginationCompletion)
+        
+    }
 }
 
 // Shows Endpoint
@@ -239,25 +285,25 @@ extension GiantBombAPI {
     public func getNextPageShows(limit: Int?,
                                  sort: SortOptions?,
                                  completion: @escaping (Result<[Show]>) -> Void) {
-        guard let paginationInfo = paginations[Endpoint.shows(limit: nil, offset: nil, sort: nil).path] else {
-            getShows(limit: limit, offset: nil, sort: sort, completion: completion)
-            return
-        }
-        let newOffset = paginationInfo.lastLimit + paginationInfo.lastOffset
-        let endpoint = Endpoint.shows(limit: limit, offset: newOffset, sort: sort)
-        makeApiRequest(endpoint: endpoint, completion: completion) {[endpoint] (apiResponse, paginations: inout[String:PaginationInfo]) in
-            paginations[endpoint.path] = PaginationInfo(lastLimit: apiResponse.limit, lastOffset: apiResponse.offset)
-        }
+        let endpoint = Endpoint.shows(limit: limit, offset: nil, sort: sort)
+        makePaginatedApiRequest(endpoint: endpoint, completion: completion)
     }
 }
 
 // Categories Endpoint
 extension GiantBombAPI {
     public func getCategories(limit: Int?,
-                              offset: Int?,
-                              sort: SortOptions?,
-                              completion: @escaping (Result<[Category]>) -> Void) {
+                         offset: Int?,
+                         sort: SortOptions?,
+                         completion: @escaping (Result<[Category]>) -> Void) {
         let endpoint = Endpoint.categories(limit: limit, offset: offset, sort: sort)
-//        makeRequest(endpoint: endpoint, completion: completion)
+        makeApiRequest(endpoint: endpoint, completion: completion, paginationCompletion: nil)
+    }
+    
+    public func getNextPageCategories(limit: Int?,
+                                 sort: SortOptions?,
+                                 completion: @escaping (Result<[Category]>) -> Void) {
+        let endpoint = Endpoint.categories(limit: limit, offset: nil, sort: sort)
+        makePaginatedApiRequest(endpoint: endpoint, completion: completion)
     }
 }
