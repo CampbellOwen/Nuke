@@ -15,28 +15,32 @@ private enum Sections: Int, CaseIterable{
 
 class CategoryListViewController: UITableViewController {
 
-    var apiKey: String?
-    var api = GiantBombAPI()
+    var networkController: NetworkController?
+    var showResource = ShowsResource()
+    var showTask: URLSessionDataTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let keychain = KeychainManager()
         print("Checking user is logged in")
-        apiKey = keychain.getApiKey()
+//        apiKey = keychain.getApiKey()
         updateModel()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if apiKey == nil {
-            let loginStoryboard = UIStoryboard.init(name: "Login", bundle: Bundle.main)
-            let loginController = loginStoryboard.instantiateInitialViewController()
-            loginController?.modalPresentationStyle = .formSheet
-            loginController?.modalTransitionStyle = .coverVertical
-            if loginController != nil {
-                present(loginController!, animated: true, completion: nil)
-            }
+    }
+    
+    func authenticate(completion: @escaping () -> Void) {
+        let loginStoryboard = UIStoryboard.init(name: "Login", bundle: Bundle.main)
+        let loginController = loginStoryboard.instantiateInitialViewController()
+        if let navigationController = loginController as? UINavigationController, let login = navigationController.viewControllers.last as? LoginViewController {
+            login.networkController = networkController
+            login.completion = completion
+        }
+        loginController?.modalPresentationStyle = .formSheet
+        loginController?.modalTransitionStyle = .coverVertical
+        if let loginController = loginController {
+            present(loginController, animated: true, completion: nil)
         }
     }
     
@@ -45,39 +49,73 @@ class CategoryListViewController: UITableViewController {
     }
     
     // MARK: - Model
-    var categories: [Category]? {
-        didSet {
-            tableView.reloadSections(IndexSet(integer: Sections.categories.rawValue), with: .automatic)
-        }
-    }
     var shows: [Show]? {
         didSet {
             tableView.reloadSections(IndexSet(integer: Sections.shows.rawValue), with: .automatic)
         }
     }
     
+    var categories: [Category]? {
+        didSet {
+            tableView.reloadSections(IndexSet(integer: Sections.categories.rawValue), with: .automatic)
+        }
+    }
+    
     private func updateModel() {
-        api.getCategories(limit: nil, offset: nil, sort: nil) { result in
+//        api.getCategories(limit: nil, offset: nil, sort: nil) { result in
+//            switch result {
+//            case .failure(let error):
+//                print("Error getting categories:\(error)")
+//            case .success(let categories):
+//                DispatchQueue.main.async {
+//                    self.categories = categories
+//                }
+//            }
+//        }
+//        
+//        network.getShows(limit: nil, offset: nil, sort: nil) { result in
+//            switch result {
+//            case .failure(let error):
+//                print("Error getting shows:\(error)")
+//            case .success(let shows):
+//                DispatchQueue.main.async {
+//                    self.shows = shows
+//                }
+//            }
+//        }
+        print("Updating Model")
+        showTask = networkController?.load(with: showResource) { [weak self] (result) in
+            print("Finished")
             switch result {
             case .failure(let error):
-                print("Error getting categories:\(error)")
-            case .success(let categories):
+                switch error {
+                case .authenticationError:
+                    DispatchQueue.main.async {
+                        print("Need to authenticate")
+                        self?.authenticate { [weak self] in
+                            self?.updateModel()
+                        }
+                        
+                    }
+                case .badRequest, .failed, .unableToDecode:
+                    print("Error getting shows")
+                }
+            case .success(let result):
                 DispatchQueue.main.async {
-                    self.categories = categories
+                    print("Successfully got shows")
+                    var shows = result.results
+                    shows.sort { (first, second) in
+                        if (first.active && second.active) || (!first.active && !second.active) {
+                            return first.name.lowercased() < second.name.lowercased()
+                        }
+                        return first.active
+                    }
+                    self?.shows = shows
                 }
             }
+                
         }
         
-        api.getShows(limit: nil, offset: nil, sort: nil) { result in
-            switch result {
-            case .failure(let error):
-                print("Error getting shows:\(error)")
-            case .success(let shows):
-                DispatchQueue.main.async {
-                    self.shows = shows
-                }
-            }
-        }
     }
 
     // MARK: - Table view data source

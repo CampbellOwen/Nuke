@@ -8,16 +8,6 @@
 
 import Foundation
 
-struct SortOptions {
-    var direction: Direction
-    var field: String
-}
-
-enum Direction: String {
-    case ascending = "asc"
-    case descending = "desc"
-}
-
 enum Endpoint {
     case video(guid: Int)
     case videos(limit: Int?, offset: Int?, sort: SortOptions?, categoryId: String?, showId: String?)
@@ -123,6 +113,11 @@ extension Endpoint {
     }
 }
 
+enum Result<T> {
+    case success(T)
+    case failure(String)
+}
+
 enum NetworkResponse: String {
     case success
     case authenticationError = "You need to be authenticated."
@@ -138,11 +133,6 @@ public enum NetworkError: String, Error {
     case encodingFailed = "Parameter encoding failed."
     case missingURL = "URL is nil."
     case badApiKey = "Api key missing or invalid."
-}
-
-enum Result<T> {
-    case success(T)
-    case failure(String)
 }
 
 struct PaginationInfo {
@@ -213,7 +203,7 @@ class GiantBombAPI {
             }
             let urlRequest = try createURLRequest(url: url,
                                                   parameters: parameters)
-            networkManager.makeRequest(urlRequest: urlRequest) { (result: Result<AuthenticationRespone>) in
+            networkManager.makeRequest(urlRequest: urlRequest) { (result: Result<AuthenticationResponse>) in
                 switch result {
                 case .failure(let error):
                     completion(.failure(error))
@@ -232,11 +222,11 @@ class GiantBombAPI {
         }
     }
     
-    private func makeApiRequest<T:Decodable>(endpoint: Endpoint, completion: @escaping (Result<[T]>) -> Void, paginationCompletion: ((GiantBombApiResponse<T>, inout [String:PaginationInfo]) -> Void)?){
+    private func makeApiRequest<T:Decodable>(endpoint: Endpoint, completion: @escaping (Result<[T]>) -> Void, paginationCompletion: ((APIResponse<T>, inout [String:PaginationInfo]) -> Void)?){
         cancel()
         do {
             let urlRequest = try createURLRequest(fromEndpoint: endpoint)
-            networkManager.makeRequest(urlRequest: urlRequest) { [weak self](result: Result<GiantBombApiResponse<T>>) in
+            networkManager.makeRequest(urlRequest: urlRequest) { [weak self](result: Result<APIResponse<T>>) in
                 switch result {
                 case .failure(let error):
                     completion(.failure(error))
@@ -254,7 +244,7 @@ class GiantBombAPI {
     }
     
     private func makePaginatedApiRequest<T:Decodable>(endpoint: Endpoint, completion: @escaping (Result<[T]>) -> Void) {
-        let paginationCompletion: ((GiantBombApiResponse<T>, inout [String:PaginationInfo]) -> Void) = { [endpoint] (apiResponse, paginations: inout[String:PaginationInfo]) in
+        let paginationCompletion: ((APIResponse<T>, inout [String:PaginationInfo]) -> Void) = { [endpoint] (apiResponse, paginations: inout[String:PaginationInfo]) in
             paginations[endpoint.path] = PaginationInfo(lastLimit: apiResponse.limit, lastOffset: apiResponse.offset)
         }
         

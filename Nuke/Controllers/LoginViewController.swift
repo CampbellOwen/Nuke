@@ -11,7 +11,9 @@ import UIKit
 class LoginViewController: UIViewController {
 
     private var beenSeen = false
-    private var api = GiantBombAPI()
+    var networkController: NetworkController?
+    var completion: (() -> Void)?
+    private var authTask: URLSessionDataTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +39,9 @@ class LoginViewController: UIViewController {
     
     // MARK: - Outlets
     @IBAction func tryAuthenticate(_ sender: UIButton) {
+        print("Authenticating")
         guard let regCode = registrationCode.text else { return }
-        api.authenticate(withToken: regCode) { result in
+        authTask = networkController?.authenticate(with: regCode) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error)
@@ -49,12 +52,14 @@ class LoginViewController: UIViewController {
                     print("Keychain failed to store apikey")
                     return
                 }
+                self?.networkController?.apiKey = apiKey
                 
                 print("Testing retrive: \(keychain.getApiKey() ?? "not found")")
 
                 DispatchQueue.main.async {
                     print("Dismissing")
-                    self.presentingViewController?.dismiss(animated: true, completion: nil)
+                    self?.presentingViewController?.dismiss(animated: true, completion: nil)
+                    self?.completion?()
                 }
             }
         }
@@ -78,7 +83,6 @@ class LoginViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        api.cancel()
     }
 
 }

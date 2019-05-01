@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AuthenticationRespone: Codable {
+struct AuthenticationResponse: Codable {
     var status: String
     var creationTime: String
     var regToken: String
