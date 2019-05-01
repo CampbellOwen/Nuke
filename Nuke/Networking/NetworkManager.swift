@@ -13,6 +13,8 @@ class NetworkManager {
     private var task: URLSessionTask?
     
     public func makeRequest<T:Decodable>(urlRequest: URLRequest, completion: @escaping (Result<T>) -> Void){
+        let desc = urlRequest.description
+        let url = urlRequest.url
         task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if error != nil {
                 completion(.failure(NetworkResponse.failed.rawValue))
@@ -29,7 +31,7 @@ class NetworkManager {
                 }
             }
             else {
-                print(response?.debugDescription)
+                print(response?.debugDescription ?? "failed")
                 completion(.failure(NetworkResponse.noData.rawValue))
             }
             

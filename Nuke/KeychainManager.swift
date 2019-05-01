@@ -58,8 +58,8 @@ class KeychainManager {
     
     public func removeApiKey() -> Bool {
         let query: [String:Any] = [kSecClass as String: kSecClassGenericPassword,
-        kSecAttrAccount as String: "apiKey",
-        kSecAttrService as String: "GiantBomb",
+            kSecAttrAccount as String: "apiKey",
+            kSecAttrService as String: "GiantBomb",
         ]
         
         let status = SecItemDelete(query as CFDictionary)
