@@ -62,27 +62,6 @@ class CategoryListViewController: UITableViewController {
     }
     
     private func updateModel() {
-//        api.getCategories(limit: nil, offset: nil, sort: nil) { result in
-//            switch result {
-//            case .failure(let error):
-//                print("Error getting categories:\(error)")
-//            case .success(let categories):
-//                DispatchQueue.main.async {
-//                    self.categories = categories
-//                }
-//            }
-//        }
-//        
-//        network.getShows(limit: nil, offset: nil, sort: nil) { result in
-//            switch result {
-//            case .failure(let error):
-//                print("Error getting shows:\(error)")
-//            case .success(let shows):
-//                DispatchQueue.main.async {
-//                    self.shows = shows
-//                }
-//            }
-//        }
         print("Updating Model")
         showTask = networkController?.load(with: showResource) { [weak self] (result) in
             print("Finished")

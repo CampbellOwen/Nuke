@@ -17,9 +17,6 @@
 		5A409667212E3F4D0060A2F8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A409666212E3F4D0060A2F8 /* Category.swift */; };
 		5A409669212E43640060A2F8 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A409668212E43640060A2F8 /* APIResponse.swift */; };
 		5AA6EFC9215F2E0D00F37880 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA6EFC8215F2E0D00F37880 /* KeychainManager.swift */; };
-		5AA775A9215C4BF300871479 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA775A8215C4BF300871479 /* NetworkManager.swift */; };
-		5AAB0CA3215B411700A593C6 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB0CA2215B411700A593C6 /* HTTPMethod.swift */; };
-		5AAB0CB5215B60D800A593C6 /* GiantBombAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB0CB4215B60D800A593C6 /* GiantBombAPI.swift */; };
 		5AAB0CB7215B70EB00A593C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AAB0CB6215B70EB00A593C6 /* Main.storyboard */; };
 		5AAB3F23215EE31700274ED4 /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB3F22215EE31700274ED4 /* AuthenticationResponse.swift */; };
 		5AAB3F25215EF0A900274ED4 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AAB3F24215EF0A900274ED4 /* Login.storyboard */; };
@@ -47,9 +44,6 @@
 		5A409666212E3F4D0060A2F8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		5A409668212E43640060A2F8 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		5AA6EFC8215F2E0D00F37880 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
-		5AA775A8215C4BF300871479 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		5AAB0CA2215B411700A593C6 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		5AAB0CB4215B60D800A593C6 /* GiantBombAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiantBombAPI.swift; sourceTree = "<group>"; };
 		5AAB0CB6215B70EB00A593C6 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5AAB3F22215EE31700274ED4 /* AuthenticationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationResponse.swift; sourceTree = "<group>"; };
 		5AAB3F24215EF0A900274ED4 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -146,9 +140,6 @@
 		5AAB0C9B215B405E00A593C6 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				5AAB0CB4215B60D800A593C6 /* GiantBombAPI.swift */,
-				5AAB0CA2215B411700A593C6 /* HTTPMethod.swift */,
-				5AA775A8215C4BF300871479 /* NetworkManager.swift */,
 				5AF77FD62279516F00C30CF1 /* ApiResource.swift */,
 				5AF77FDA227954C600C30CF1 /* NetworkController.swift */,
 				5AF77FDC227954E100C30CF1 /* ShowsResource.swift */,
@@ -240,14 +231,11 @@
 				5A409665212E3EA40060A2F8 /* Show.swift in Sources */,
 				5AAB3F2D215EFA4A00274ED4 /* LoginWebViewController.swift in Sources */,
 				5A186C83212F64EB00413B1A /* VideoCollectionInfo.swift in Sources */,
-				5AA775A9215C4BF300871479 /* NetworkManager.swift in Sources */,
 				5AA6EFC9215F2E0D00F37880 /* KeychainManager.swift in Sources */,
 				5A409669212E43640060A2F8 /* APIResponse.swift in Sources */,
 				5A11659F212E064800AC33CD /* Video.swift in Sources */,
 				5A11658D212E063900AC33CD /* AppDelegate.swift in Sources */,
 				5AF77FDB227954C600C30CF1 /* NetworkController.swift in Sources */,
-				5AAB0CB5215B60D800A593C6 /* GiantBombAPI.swift in Sources */,
-				5AAB0CA3215B411700A593C6 /* HTTPMethod.swift in Sources */,
 				5AF77FD92279545500C30CF1 /* Model.swift in Sources */,
 				5AAB3F27215EF35E00274ED4 /* CategoryListViewController.swift in Sources */,
 				5AF77FDF227A208300C30CF1 /* VideosResource.swift in Sources */,

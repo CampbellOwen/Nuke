@@ -12,9 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    var api: GiantBombAPI?
-    
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -30,22 +28,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         
-        let urlSessionConfig = URLSessionConfiguration.default
-        urlSessionConfig.requestCachePolicy = .useProtocolCachePolicy
-        let session = URLSession(configuration: urlSessionConfig)
-        
-        let keychainManager = KeychainManager()
-        keychainManager.removeApiKey()
-        let apiKey = keychainManager.getApiKey()
-        let networkController = NetworkController(apiKey: apiKey ?? "", session: session)
-        
-        let vc = window?.rootViewController
-        
-        if let svvc = vc as? UISplitViewController,
-            let nvvc = svvc.viewControllers.first as? UINavigationController,
-            let clvc = nvvc.viewControllers.last as? CategoryListViewController {
-            clvc.networkController = networkController
-        }
+//        let urlSessionConfig = URLSessionConfiguration.default
+//        urlSessionConfig.requestCachePolicy = .useProtocolCachePolicy
+//        let session = URLSession(configuration: urlSessionConfig)
+//        
+//        let keychainManager = KeychainManager()
+//        keychainManager.removeApiKey()
+//        let apiKey = keychainManager.getApiKey()
+//        let networkController = NetworkController(apiKey: apiKey ?? "", session: session)
+//        
+//        let vc = window?.rootViewController
+//        
+//        if let svvc = vc as? UISplitViewController,
+//            let nvvc = svvc.viewControllers.first as? UINavigationController,
+//            let clvc = nvvc.viewControllers.last as? CategoryListViewController {
+//            clvc.networkController = networkController
+//        }
         
 //        let resource = ShowsResource()
 //        
