@@ -25,12 +25,14 @@ class NetworkController {
     
     var apiKey: String
     private var session: URLSession
+    private var sessionConfig: URLSessionConfiguration
     
     private let auth_endpoint = URL(string: "https://www.giantbomb.com/app/Nuke/get-result")!
     
-    init(apiKey: String, session: URLSession) {
+    init(apiKey: String, sessionConfig: URLSessionConfiguration) {
         self.apiKey = apiKey
-        self.session = session
+        self.sessionConfig = sessionConfig
+        self.session = URLSession(configuration: sessionConfig)
     }
     
     fileprivate func createURL(url: URL, parameters: [String:String]) -> URL {
@@ -153,5 +155,11 @@ class NetworkController {
         
         task.resume()
         return task
+    }
+    
+    
+    func cancel() {
+        session.invalidateAndCancel()
+        session = URLSession(configuration: sessionConfig)
     }
 }

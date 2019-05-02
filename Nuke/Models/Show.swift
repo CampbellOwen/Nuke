@@ -15,7 +15,7 @@ struct Show: Decodable, CustomStringConvertible, VideoCollectionInfo
     var siteUrl: URL
     var images: [ImageQuality: URL]
     var position: Int
-    var active: Bool
+    var active: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -51,7 +51,7 @@ extension Show {
         let name = try container.decode(String.self, forKey: .name)
         let siteUrl = try container.decode(URL.self, forKey: .siteUrl)
         let position = try container.decode(Int.self, forKey: .position)
-        let active = try container.decode(Bool.self, forKey: .active)
+        let active = try? container.decode(Bool.self, forKey: .active)
         
         self.init(id: id, name: name, siteUrl: siteUrl, images: imagesDict, position: position, active: active)
     }

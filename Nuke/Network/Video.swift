@@ -60,7 +60,7 @@ struct Video: Decodable, CustomStringConvertible
     var urls: [VideoQuality: URL?]
     var guid: String
     var id: Int
-    var images: [ImageQuality: URL?]
+    var images: [ImageQuality: URL]
     var length: TimeInterval
     var name: String
     var date: String
@@ -111,16 +111,34 @@ extension Video {
         let id = try container.decode(Int.self, forKey: .id)
         
         let images = try container.decode(Images.self, forKey: .images)
-        var imagesDict = [ImageQuality:URL?]()
-        imagesDict[.icon] = images.icon
-        imagesDict[.medium] = images.medium
-        imagesDict[.screen] = images.screen
-        imagesDict[.screenLarge] = images.screenLarge
-        imagesDict[.large] = images.large
-        imagesDict[.original] = images.original
-        imagesDict[.small] = images.small
-        imagesDict[.thumb] = images.thumb
-        imagesDict[.tiny] = images.tiny
+        var imagesDict = [ImageQuality:URL]()
+        if let icon = images.icon {
+            imagesDict[.icon] = icon
+        }
+        if let medium = images.medium {
+            imagesDict[.medium] = medium
+        }
+        if let screen = images.screen {
+            imagesDict[.screen] = screen
+        }
+        if let screenLarge = images.screenLarge {
+            imagesDict[.screenLarge] = screenLarge
+        }
+        if let large = images.large {
+            imagesDict[.large] = large
+        }
+        if let original = images.original {
+            imagesDict[.original] = original
+        }
+        if let small = images.small {
+            imagesDict[.small] = small
+        }
+        if let thumb = images.thumb {
+            imagesDict[.thumb] = thumb
+        }
+        if let tiny = images.tiny {
+            imagesDict[.tiny] = tiny
+        }
         
         let length = try container.decode(TimeInterval.self, forKey: .length)
         let name = try container.decode(String.self, forKey: .name)

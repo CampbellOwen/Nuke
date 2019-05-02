@@ -28,15 +28,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         
-//        let urlSessionConfig = URLSessionConfiguration.default
-//        urlSessionConfig.requestCachePolicy = .useProtocolCachePolicy
-//        let session = URLSession(configuration: urlSessionConfig)
-//        
-//        let keychainManager = KeychainManager()
+        let urlSessionConfig = URLSessionConfiguration.default
+        urlSessionConfig.requestCachePolicy = .useProtocolCachePolicy
+        
+        let keychainManager = KeychainManager()
 //        keychainManager.removeApiKey()
-//        let apiKey = keychainManager.getApiKey()
-//        let networkController = NetworkController(apiKey: apiKey ?? "", session: session)
-//        
+        let apiKey = keychainManager.getApiKey()
+        let networkController = NetworkController(apiKey: apiKey ?? "", sessionConfig: urlSessionConfig)
+        
+        if let tabController = window?.rootViewController as? UITabBarController,
+            let navigationController = tabController.customizableViewControllers?.first as? UINavigationController,
+            let homeController = navigationController.topViewController as? HomeViewController {
+            homeController.networkController = networkController
+            homeController.imageCache = NSCache<NSString,UIImage>()
+        }
+//
 //        let vc = window?.rootViewController
 //        
 //        if let svvc = vc as? UISplitViewController,

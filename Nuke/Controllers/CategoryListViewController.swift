@@ -83,12 +83,12 @@ class CategoryListViewController: UITableViewController {
                 DispatchQueue.main.async {
                     print("Successfully got shows")
                     var shows = result.results
-                    shows.sort { (first, second) in
-                        if (first.active && second.active) || (!first.active && !second.active) {
-                            return first.name.lowercased() < second.name.lowercased()
-                        }
-                        return first.active
-                    }
+//                    shows.sort { (first, second) in
+//                        if (first.active ?? true && second.active ?? true) || (!first?.active && !second?.active) {
+//                            return first.name.lowercased() < second.name.lowercased()
+//                        }
+//                        return first.active
+//                    }
                     self?.shows = shows
                 }
             }

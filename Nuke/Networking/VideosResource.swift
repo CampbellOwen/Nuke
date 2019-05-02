@@ -13,7 +13,7 @@ class VideosResource : ApiResource {
     
     private let show_filter = "video_show"
 
-    let methodPath: String = "videos"
+    var methodPath: String = "videos"
     
     var offset: Int = 0
     
